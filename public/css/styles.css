@@ -1,0 +1,17 @@
+
+footer {
+    margin: 50px 0;
+}
+
+.categories{
+    margin-bottom: 8px;
+    padding: 5px;
+}
+
+.navbar{
+	margin-bottom: 0px;
+}
+
+.right-sidebar, .panel-default{
+	margin-top: 20px;
+}

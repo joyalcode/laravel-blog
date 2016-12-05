@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+Route::get('/', 'BlogController@index');
 Auth::routes();
-
-Route::get('/home', 'HomeController@index');
+Route::resource('blog', 'BlogController');
