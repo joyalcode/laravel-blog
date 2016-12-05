@@ -4,6 +4,11 @@
    <div class="row">
       <!-- Blog Post Content Column -->
       <div class="col-lg-8">
+
+         @if(Session::has('message'))
+         <p class="alert alert-success">{{ Session::get('message') }}</p>
+         @endif
+
          <h3><a href="">Blog Post Title</a></h3>
          <p><span class="glyphicon glyphicon-time"></span> <i>Posted on August 24, 2013 by <a href="#">Start Bootstrap</a></i></p>
          <!-- <hr> -->

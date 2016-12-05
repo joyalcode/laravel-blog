@@ -7,6 +7,7 @@
       <title>{{ config('app.name', 'Laravel') }}</title>
       <link href="{{ url('/') }}/css/bootstrap.min.css" rel="stylesheet">
       <link href="{{ url('/') }}/css/styles.css" rel="stylesheet">
+      <link href="{{ url('/') }}/css/select2.css" rel="stylesheet">
    </head>
    <body>
       <nav class="navbar navbar-default navbar-static-top">
@@ -33,7 +34,7 @@
                   <li><a href="{{ url('/register') }}">Register</a></li>
                   @else
                   <li><a href="{{ url('/') }}">Add Post</a></li>  
-                  <li><a href="{{ url('/') }}">Manage Posts</a></li>                                  
+                  <li><a href="{{ url('/') }}">Manage My Posts</a></li>                                  
                   <li class="dropdown">
                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                         {{ Auth::user()->name }} <span class="caret"></span>
@@ -71,5 +72,11 @@
       <script src="{{ url('/') }}/js/jquery.js"></script>
       <!-- Bootstrap Core JavaScript -->
       <script src="{{ url('/') }}/js/bootstrap.min.js"></script>
+      <script src="{{ url('/') }}/js/select2.min.js"></script>
+      <script type="text/javascript">
+         $(".js-example-basic-multiple").select2({
+            placeholder: "Select one more categories"
+         });
+      </script>      
    </body>
 </html>
