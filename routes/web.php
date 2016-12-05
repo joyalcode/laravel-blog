@@ -13,4 +13,6 @@
 
 Route::get('/', 'BlogController@index');
 Auth::routes();
+Route::get('blog/manage', 'BlogController@manage');
 Route::resource('blog', 'BlogController');
+

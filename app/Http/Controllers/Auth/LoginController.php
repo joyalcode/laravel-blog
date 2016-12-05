@@ -41,7 +41,7 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
-        Session::flash('message', 'You have been successfully logged in.');
+        Session::flash('message', 'Welcome '.ucfirst($user->name).'. You have been successfully logged in.');
         return redirect()->intended($this->redirectPath());
     }
 

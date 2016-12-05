@@ -81,4 +81,9 @@ class blogController extends Controller
     {
         //
     }
+
+    public function manage()
+    {
+        return view('manage');
+    }
 }

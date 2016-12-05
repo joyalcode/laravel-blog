@@ -6,6 +6,8 @@ use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
+use Session;
 
 class RegisterController extends Controller
 {
@@ -68,4 +70,11 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
         ]);
     }
+
+    protected function registered(Request $request, $user)
+    {
+        Session::flash('message', 'Welcome '.ucfirst($user->name).'. You have been successfully registered and logged into the site.');
+        return redirect()->intended($this->redirectPath());
+    }
+
 }
