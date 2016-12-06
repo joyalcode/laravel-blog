@@ -9,27 +9,19 @@
       <table class="table">
         <thead>
           <tr>
-            <th>Firstname</th>
-            <th>Lastname</th>
-            <th>Email</th>
+            <th width="70%">Title</th>
+            <th>Created date</th>
+            <th>Edit</th>
           </tr>
         </thead>
         <tbody>
+        @foreach($posts as $post_array)
           <tr>
-            <td>John</td>
-            <td>Doe</td>
-            <td>john@example.com</td>
+            <td>{{$post_array->title}}</td>
+            <td>{{date('d M Y',strtotime($post_array->created_at))}}</td>
+            <td><a href="{{url("blog/$post_array->id/edit")}}">Edit</a></td>
           </tr>
-          <tr>
-            <td>Mary</td>
-            <td>Moe</td>
-            <td>mary@example.com</td>
-          </tr>
-          <tr>
-            <td>July</td>
-            <td>Dooley</td>
-            <td>july@example.com</td>
-          </tr>
+        @endForeach  
         </tbody>
       </table>
     </div>

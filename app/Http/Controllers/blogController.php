@@ -7,7 +7,7 @@ use App\Post;
 use App\Category;
 use Auth;
 
-class blogController extends Controller
+class BlogController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,8 @@ class blogController extends Controller
      */
     public function index()
     {
-        return view('list');
+        $posts = Post::orderBy('created_at')->get();
+        return view('list',compact('posts'));
     }
 
     /**
@@ -27,7 +28,7 @@ class blogController extends Controller
     public function create()
     {
         $categories = Category::orderBy('category')->get();
-        return view('add_form', compact('categories'));
+        return view('add_form',compact('categories'));
     }
 
     /**
@@ -65,9 +66,12 @@ class blogController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $blog)
     {
-        //
+        $post = $blog;
+        $categories = Category::orderBy('category')->get();
+        $post_categories = $post->categories->pluck('id')->all();
+        return view('edit_form',compact('categories','post','post_categories'));
     }
 
     /**
@@ -77,9 +81,14 @@ class blogController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Post $blog)
     {
-        //
+        $blog->title = $request->title;
+        $blog->post = $request->post;
+        $blog->status = $request->status;
+        $blog->save();
+        $blog->categories()->sync($request->categories);    
+        return back();
     }
 
     /**
@@ -95,6 +104,7 @@ class blogController extends Controller
 
     public function manage()
     {
-        return view('manage');
+        $posts = Post::orderBy('created_at')->get();
+        return view('manage',compact('posts'));
     }
 }
