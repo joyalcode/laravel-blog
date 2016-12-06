@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Post;
+use App\Category;
+use Auth;
 
 class blogController extends Controller
 {
@@ -23,7 +26,8 @@ class blogController extends Controller
      */
     public function create()
     {
-        return view('add_form');
+        $categories = Category::orderBy('category')->get();
+        return view('add_form', compact('categories'));
     }
 
     /**
@@ -34,7 +38,14 @@ class blogController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $post = new Post;
+        $post->title = $request->title;
+        $post->post = $request->post;        
+        $post->status = $request->status;
+        $post->user_id = Auth::user()->id;
+        $post->save();
+        $post->categories()->attach($request->categories);
+        return back();
     }
 
     /**

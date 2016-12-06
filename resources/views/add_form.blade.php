@@ -6,28 +6,29 @@
       <div class="col-lg-8">
          <h3><a href="">Add Blog</a></h3>
          <hr>           
-         <form>
+         <form name="form1" method="POST" action="{{url('blog')}}">
+           {{ csrf_field() }}
            <div class="form-group">
-             <label for="email">Blog title</label>
-             <input type="email" class="form-control" id="email">
+             <label for="title">Blog title</label>
+             <input type="text" name="title" class="form-control" id="title">
            </div>
            <div class="form-group">
-             <label for="pwd">Post</label>
-             <textarea rows="6" class="form-control"></textarea>
+             <label for="post">Post</label>
+             <textarea rows="6" name="post" class="form-control"></textarea>
            </div>
            <div class="form-group">
-             <label for="email">Categories</label>
-             <select multiple class="form-control js-example-basic-multiple">
-               <option>HTML</option>   
-               <option>CSS</option>   
-               <option>Javascript</option>   
+             <label for="categories">Categories</label>
+             <select multiple class="form-control js-example-basic-multiple" name="categories[]" id="categories">
+                @foreach($categories as $category_array)
+               <option value="{{$category_array->id}}">{{$category_array->category}}</option>   
+               @endForeach
              </select>
            </div>      
            <div class="form-group">
-             <label for="email">Status</label>
-             <select class="form-control">
-               <option>Publish</option>   
-               <option>Draft</option>   
+             <label for="status">Status</label>
+             <select class="form-control" id="status" name="status">
+               <option value="1">Publish</option>   
+               <option value="0">Draft</option>   
              </select>
            </div>                     
            <button type="submit" class="btn btn-primary">Submit</button>
