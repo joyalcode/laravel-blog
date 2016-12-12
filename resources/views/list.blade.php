@@ -19,7 +19,11 @@
          <hr>
          @endforeach  
          <div align="center"> 
+         @if(Request::input('q'))
+            {{$posts->appends(Request::only('q'))->links()}} 
+         @else   
             {{$posts->links()}} 
+         @endIf   
          </div>      
       </div>
       <div class="col-md-4 right-sidebar">

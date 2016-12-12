@@ -19,7 +19,7 @@
             <form method="post" action="{{url('blog/comment/'.$blog->id)}}">
                {{ csrf_field() }}
                <div class="form-group">
-                  <textarea name="comment" class="form-control" rows="3"></textarea>
+                  <textarea maxlength="250" name="comment" class="form-control" rows="3"></textarea>
                </div>
                <button type="submit" class="btn btn-primary">Submit</button>
             </form>

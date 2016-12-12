@@ -14,6 +14,8 @@
 Route::get('/', 'BlogController@index');
 Auth::routes();
 Route::get('blog/manage', 'BlogController@manage');
+Route::post('blog/search', 'BlogController@search');
+Route::get('blog/search', 'BlogController@search');
 Route::get('blog/category/{id}', 'BlogController@category');
 Route::get('blog/user/{id}', 'BlogController@user');
 Route::post('blog/comment/{blog}', 'BlogController@comment');

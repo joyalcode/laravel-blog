@@ -23,6 +23,22 @@ class BlogController extends Controller
         return view('list',compact('posts'));
     }
 
+    public function search(Request $request)
+    {
+        $query = $request->q;
+        if($query) 
+        {
+            $posts = Post::orderBy('created_at','desc')
+                                                        ->where('title','like','%'.$query.'%')
+                                                        ->orWhere('post', 'like', '%'.$query.'%')       
+                                                        ->paginate(4);        
+            return view('list',compact('posts'));
+        }   
+
+        $posts = Post::orderBy('created_at','desc')->paginate(5);
+        return view('list',compact('posts'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *

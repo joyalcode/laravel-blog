@@ -1,13 +1,16 @@
          <!-- Blog Search Well -->
-         <div class="well">
-            <h4>Search</h4>
-            <div class="input-group">
-               <input type="text" class="form-control">
-               <span class="input-group-btn">
-                  <button class="btn btn-primary" type="button">Search</button>
-               </span>
-            </div>
-         </div>
+		<div class="well">
+			<form method="post" action="{{url('blog/search')}}">
+			{{ csrf_field() }}
+				<h4>Search</h4>
+				<div class="input-group">
+					<input placeholder="search here" @if(Request::input('q')) value="{{Request::input('q')}}" @endIf type="text" name="q" class="form-control">
+					<span class="input-group-btn">
+						<button class="btn btn-primary" type="submit">Search</button>
+					</span>
+				</div>
+			</form>
+		</div>
          <div class="well">
             <h4>Categories</h4>
             <div class="row">
