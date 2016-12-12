@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Post;
 use App\Category;
+use App\User;
 use Auth;
 
 class BlogController extends Controller
@@ -16,7 +17,7 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $posts = Post::orderBy('created_at')->get();
+        $posts = Post::orderBy('created_at','desc')->paginate(5);
         return view('list',compact('posts'));
     }
 
@@ -55,9 +56,9 @@ class BlogController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Post $blog)
     {
-       return view('blog');
+       return view('view',compact('blog'));
     }
 
     /**
@@ -104,7 +105,21 @@ class BlogController extends Controller
 
     public function manage()
     {
-        $posts = Post::orderBy('created_at')->get();
+        $posts = Post::orderBy('created_at','desc')->paginate(5);
         return view('manage',compact('posts'));
     }
+
+    public function category($id)
+    {
+        $category = Category::find($id);
+        $posts = $category->posts()->orderBy('created_at','desc')->paginate(5);
+        return view('list',compact('posts'));
+    }    
+
+    public function user($id)
+    {
+        $user = user::find($id);
+        $posts = $user->posts()->orderBy('created_at','desc')->paginate(5);
+        return view('list',compact('posts'));
+    }       
 }

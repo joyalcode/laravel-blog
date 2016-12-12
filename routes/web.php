@@ -14,5 +14,7 @@
 Route::get('/', 'BlogController@index');
 Auth::routes();
 Route::get('blog/manage', 'BlogController@manage');
+Route::get('blog/category/{id}', 'BlogController@category');
+Route::get('blog/user/{id}', 'BlogController@user');
 Route::resource('blog', 'BlogController');
 

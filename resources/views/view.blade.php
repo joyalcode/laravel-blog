@@ -4,16 +4,14 @@
    <div class="row">
       <!-- Blog Post Content Column -->
       <div class="col-lg-8">
-         <h3><a href="">Blog Post Title</a></h3>
+         <h3><a href="">{{$blog->title}}</a></h3>
          <p><span class="glyphicon glyphicon-time"></span> <i>Posted on August 24, 2013 by <a href="#">Start Bootstrap</a></i></p>
-         <!-- <hr> -->
-         <p>Lorem ipsum dolor Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut,  sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.</p>
-         <p>Lorem ipsum dolor Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut,  sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.</p>
-         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.</p>
-         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.</p>
-         <a href="" class="btn btn-default btn-xs">HTML</a>
-         <a href="" class="btn btn-default btn-xs">CSS</a>
-         <a href="" class="btn btn-default btn-xs">jQuery</a>
+         {{$blog->post}}
+         <br>
+         
+            @foreach($blog->categories as $category_array)
+            <a href="{{url('blog/category/'.$category_array->id)}}" class="btn btn-default btn-xs">{{$category_array->category}}</a>
+            @endforeach
          <hr>
          <div class="well">
             <h4>Leave a Comment:</h4>

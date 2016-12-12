@@ -22,6 +22,9 @@
             <td><a href="{{url("blog/$post_array->id/edit")}}">Edit</a></td>
           </tr>
         @endForeach  
+        <tr>
+           <td align="center" colspan="3">{{$posts->links()}} </td>
+        </tr>
         </tbody>
       </table>
     </div>

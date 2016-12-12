@@ -9,32 +9,18 @@
          <p class="alert alert-success">{{ Session::get('message') }}</p>
          @endif
 
-         <h3><a href="">Blog Post Title</a></h3>
-         <p><span class="glyphicon glyphicon-time"></span> <i>Posted on August 24, 2013 by <a href="#">Start Bootstrap</a></i></p>
-         <!-- <hr> -->
-         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.</p>
-         <a href="" class="btn btn-default btn-xs">HTML</a>
-         <a href="" class="btn btn-default btn-xs">CSS</a>
-         <a href="" class="btn btn-default btn-xs">jQuery</a>
+         @foreach($posts as $post_array)
+         <h3><a href="blog/{{$post_array->id}}">{{$post_array->title}}</a></h3>
+         <p><span class="glyphicon glyphicon-time"></span> <i>Posted on August 24, 2013 by <a href="{{url('blog/user/'.$post_array->user->id)}}">{{$post_array->user->name}}</a></i></p>
+         <p>{{$post_array->post}}</p>
+            @foreach($post_array->categories as $category_array)
+            <a href="{{url('blog/category/'.$category_array->id)}}" class="btn btn-default btn-xs">{{$category_array->category}}</a>
+            @endforeach   
          <hr>
-         <h3><a href="">Blog Post Title</a></h3>
-         <span class="glyphicon glyphicon-time"></span><i> Posted on August 24, 2013 by </i><a href="#"></i>Start Bootstrap</i></a></p>
-         <!-- <hr> -->
-         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.dicta earum fugiat. Temporibus, voluptatibus.</p>
-         <a href="" class="btn btn-default btn-xs">HTML</a>
-         <a href="" class="btn btn-default btn-xs">CSS</a>
-         <a href="" class="btn btn-default btn-xs">jQuery</a>
-         <hr>
-         <h3><a href="">Blog Post Title</a></h3>
-         <p><span class="glyphicon glyphicon-time"></span> <i> Posted on August 24, 2013 by <a href="#">Start Bootstrap</a></i></p>
-         <!-- <hr> -->
-         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.nihil dicta earum fugiat. Temporibus, voluptatibus.</p>
-         <hr>
-         <h3><a href="">Blog Post Title</a></h3>
-         <p><span class="glyphicon glyphicon-time"></span> Posted on August 24, 2013 by <a href="#">Start Bootstrap</a></p>
-         <!-- <hr> -->
-         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut,Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.</p>
-         <hr>
+         @endforeach  
+         <div align="center"> 
+            {{$posts->links()}} 
+         </div>      
       </div>
       <!-- Blog Sidebar Widgets Column -->
       <div class="col-md-4 right-sidebar">
