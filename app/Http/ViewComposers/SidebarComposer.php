@@ -3,34 +3,24 @@
 namespace App\Http\ViewComposers;
 
 use Illuminate\View\View;
+use App\Category;
+use App\Post;
+use App\Comment;
 
 class SidebarComposer
 {
-    public $movieList = [];
-    /**
-     * Create a movie composer.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->movieList = [
-            'Shawshank redemption',
-            'Forrest Gump',
-            'The Matrix',
-            'Pirates of the Carribean',
-            'Back to the future II',
-        ];
-    }
+   /**
+   * Bind data to the view.
+   *
+   * @param  View  $view
+   * @return void
+   */
 
-    /**
-     * Bind data to the view.
-     *
-     * @param  View  $view
-     * @return void
-     */
-    public function compose(View $view)
-    {
-        $view->with('latestMovie', end($this->movieList));
-    }
+   public function compose(View $view)
+   {
+   	$posts = Post::orderBy('created_at','desc')->limit(5)->get();
+    	$categories = Category::orderBy('category')->get();
+      $comments = Comment::orderBy('created_at','desc')->limit(5)->get();
+   	$view->with('categories', $categories)->with('posts',$posts)->with('comments',$comments);
+   }
 }

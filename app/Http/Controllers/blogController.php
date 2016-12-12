@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use App\Post;
 use App\Category;
 use App\User;
+use App\Comment;
 use Auth;
+use Session;
 
 class BlogController extends Controller
 {
@@ -58,7 +60,8 @@ class BlogController extends Controller
      */
     public function show(Post $blog)
     {
-       return view('view',compact('blog'));
+       $comments = $blog->comments; 
+       return view('view',compact('blog','comments'));
     }
 
     /**
@@ -121,5 +124,15 @@ class BlogController extends Controller
         $user = user::find($id);
         $posts = $user->posts()->orderBy('created_at','desc')->paginate(5);
         return view('list',compact('posts'));
-    }       
+    }  
+
+    public function comment(Request $request, Post $blog)
+    {
+        $comment = new Comment;
+        $comment->comment = $request->comment;
+        $comment->user_id = Auth::user()->id;
+        $blog->comments()->save($comment);
+        Session::flash('message', 'Member has been updated successfully.');
+        return back();
+    }
 }

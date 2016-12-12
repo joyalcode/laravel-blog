@@ -14,7 +14,7 @@ class ComposerServiceProvider extends ServiceProvider
     public function boot()
     {
         view()->composer(
-                    'layouts/app',
+                    'sidebar',
                     'App\Http\ViewComposers\SidebarComposer'
                 );
     }
