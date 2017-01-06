@@ -19,3 +19,17 @@ footer {
 .alert-success{
 	margin-top: 20px;
 }
+
+p.info{
+	color:#666;
+	margin-top: 12px;
+}
+
+hr.info{
+	margin-bottom: 0px;
+	margin-top: 8px;
+}
+
+.no-records{
+	margin-top: 20px;
+}

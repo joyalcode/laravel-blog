@@ -5,7 +5,16 @@
       <!-- Blog Post Content Column -->
       <div class="col-lg-8">
          <h3><a href="">Edit Blog</a></h3>
-         <hr>           
+         <hr>   
+         @if (count($errors) > 0)
+         <div class="alert alert-danger">
+            <ul>
+               @foreach ($errors->all() as $error)
+               <li>{{ $error }}</li>
+               @endforeach
+            </ul>
+         </div>
+         @endif                 
          <form name="form1" method="POST" action="{{url('blog/'.$post->id)}}">
           <input name="_method" type="hidden" value="PATCH">
            {{ csrf_field() }}

@@ -23,22 +23,6 @@ class BlogController extends Controller
         return view('list',compact('posts'));
     }
 
-    public function search(Request $request)
-    {
-        $query = $request->q;
-        if($query) 
-        {
-            $posts = Post::orderBy('created_at','desc')
-                                                        ->where('title','like','%'.$query.'%')
-                                                        ->orWhere('post', 'like', '%'.$query.'%')       
-                                                        ->paginate(4);        
-            return view('list',compact('posts'));
-        }   
-
-        $posts = Post::orderBy('created_at','desc')->paginate(5);
-        return view('list',compact('posts'));
-    }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -50,6 +34,12 @@ class BlogController extends Controller
         return view('add_form',compact('categories'));
     }
 
+
+    public function test()
+    {
+        return 'hello world';
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -58,6 +48,8 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, $this->validationRules(), $this->customErrorMessages());
+
         $post = new Post;
         $post->title = $request->title;
         $post->post = $request->post;        
@@ -65,6 +57,9 @@ class BlogController extends Controller
         $post->user_id = Auth::user()->id;
         $post->save();
         $post->categories()->attach($request->categories);
+
+        Session::flash('message', 'New post has been added successfully.');
+
         return back();
     }
 
@@ -89,6 +84,10 @@ class BlogController extends Controller
     public function edit(Post $blog)
     {
         $post = $blog;
+        if($post->user_id != Auth::user()->id)
+        {
+            return redirect('/');
+        }
         $categories = Category::orderBy('category')->get();
         $post_categories = $post->categories->pluck('id')->all();
         return view('edit_form',compact('categories','post','post_categories'));
@@ -103,11 +102,14 @@ class BlogController extends Controller
      */
     public function update(Request $request, Post $blog)
     {
+        $this->validate($request, $this->validationRules(), $this->customErrorMessages());
+
         $blog->title = $request->title;
         $blog->post = $request->post;
         $blog->status = $request->status;
         $blog->save();
-        $blog->categories()->sync($request->categories);    
+        $blog->categories()->sync($request->categories);  
+        Session::flash('message', 'Post has been updated successfully.');  
         return back();
     }
 
@@ -124,31 +126,61 @@ class BlogController extends Controller
 
     public function manage()
     {
-        $posts = Post::orderBy('created_at','desc')->paginate(5);
+        $posts = Post::orderBy('created_at','desc')->where('user_id', Auth::user()->id)->paginate(10);
         return view('manage',compact('posts'));
     }
 
     public function category($id)
     {
         $category = Category::find($id);
+        $page_title = "Posts of category '$category->category'";
         $posts = $category->posts()->orderBy('created_at','desc')->paginate(5);
-        return view('list',compact('posts'));
+        return view('list',compact('posts','page_title'));
     }    
 
     public function user($id)
     {
         $user = user::find($id);
+        $page_title = "Posts by '$user->name'";
         $posts = $user->posts()->orderBy('created_at','desc')->paginate(5);
-        return view('list',compact('posts'));
+        return view('list',compact('posts','page_title'));
     }  
 
     public function comment(Request $request, Post $blog)
     {
-        $comment = new Comment;
-        $comment->comment = $request->comment;
-        $comment->user_id = Auth::user()->id;
-        $blog->comments()->save($comment);
-        Session::flash('message', 'Member has been updated successfully.');
+        if($request->comment)
+        {
+            $comment = new Comment;
+            $comment->comment = $request->comment;
+            $comment->user_id = Auth::user()->id;
+            $blog->comments()->save($comment);
+            Session::flash('message', 'Member has been updated successfully.');
+        }
         return back();
+    }
+
+    public function search(Request $request)
+    {
+        $sword = $request->q;
+        $page_title = "Search '$request->q'";
+        $posts = Post::where('title', 'like', '%' . $sword . '%')
+                                                        ->orWhere('post', 'like', '%' . $sword . '%')
+                                                        ->orderBy('created_at','desc')->paginate(5);                        
+        return view('list',compact('posts','page_title','sword'));
+    }
+
+
+    public function validationRules()
+    {
+        return $rules = [
+                'title' => 'required',
+                'post' => 'required',
+                'categories' => 'required',
+            ];        
+    }
+
+    public function customErrorMessages()
+    {
+        return $messages = ['categories.required' => 'One or more categories required.'];
     }
 }
