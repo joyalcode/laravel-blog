@@ -16,7 +16,7 @@ footer {
 	margin-top: 20px;
 }
 
-.alert-success{
+.alert-success, .alert-warning{
 	margin-top: 20px;
 }
 

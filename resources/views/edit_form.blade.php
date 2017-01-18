@@ -14,7 +14,10 @@
                @endforeach
             </ul>
          </div>
-         @endif                 
+         @endif               
+         @if(Session::has('message'))
+          <p class="alert alert-success">{{ Session::get('message') }}</p>
+         @endif           
          <form name="form1" method="POST" action="{{url('blog/'.$post->id)}}">
           <input name="_method" type="hidden" value="PATCH">
            {{ csrf_field() }}
@@ -37,8 +40,8 @@
            <div class="form-group">
              <label for="status">Status</label>
              <select class="form-control" id="status" name="status">
-               <option value="1">Publish</option>   
-               <option value="0">Draft</option>   
+               <option value="1" @if((int)$post->status) selected @endIF>Publish</option>
+               <option value="0" @if(!(int)$post->status) selected @endIF>Draft</option> 
              </select>
            </div>                     
            <button type="submit" class="btn btn-primary">Submit</button>

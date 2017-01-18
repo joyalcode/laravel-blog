@@ -7,7 +7,7 @@
          <p class="alert alert-success">{{ Session::get('message') }}</p>
          @endif
          @if(isset($page_title))
-         <p class="info">{{$page_title}}</p>
+         <p class="info" style="font-weight: bold;">{{$page_title}}</p>
          <hr class="info">
          @endIf
          @if(count($posts))

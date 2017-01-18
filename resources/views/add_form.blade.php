@@ -15,6 +15,9 @@
             </ul>
          </div>
          @endif
+         @if(Session::has('message'))
+          <p class="alert alert-success">{{ Session::get('message') }}</p>
+         @endif         
          <form name="form1" method="POST" action="{{url('blog')}}">
             {{ csrf_field() }}
             <div class="form-group">

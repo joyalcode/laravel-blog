@@ -34,12 +34,6 @@ class BlogController extends Controller
         return view('add_form',compact('categories'));
     }
 
-
-    public function test()
-    {
-        return 'hello world';
-    }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -162,10 +156,10 @@ class BlogController extends Controller
     public function search(Request $request)
     {
         $sword = $request->q;
-        $page_title = "Search '$request->q'";
+        $page_title = "Searching '$request->q'";
         $posts = Post::where('title', 'like', '%' . $sword . '%')
-                                                        ->orWhere('post', 'like', '%' . $sword . '%')
-                                                        ->orderBy('created_at','desc')->paginate(5);                        
+                        ->orWhere('post', 'like', '%' . $sword . '%')
+                        ->orderBy('created_at','desc')->paginate(5);
         return view('list',compact('posts','page_title','sword'));
     }
 
