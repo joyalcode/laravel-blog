@@ -9,5 +9,5 @@ class Category extends Model
     public function posts()
     {
         return $this->BelongsToMany("App\Post","category_post");
-    }   
+    }
 }

@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use database\seeds\CategoriesTableSeeder;
+use database\seeds\UsersTableSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -11,6 +13,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+        $this->call('UsersTableSeeder');        
+        // $this->call('CategoriesTableSeeder');
+        
+        // $this->call(CategoriesTableSeeder);
+        		// DB::table('categories')->insert(['categories'=>'new']);
+
+        // DB:table('categories')->insert(['categories'=>'new']);
+        // $this->command->info("Categories table seeded)");
     }
 }
