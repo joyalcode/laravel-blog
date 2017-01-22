@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use database\seeds\CategoriesTableSeeder;
 use database\seeds\UsersTableSeeder;
+use database\seeds\PostsTableSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,13 +14,27 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call('UsersTableSeeder');        
-        // $this->call('CategoriesTableSeeder');
-        
-        // $this->call(CategoriesTableSeeder);
-        		// DB::table('categories')->insert(['categories'=>'new']);
+        factory(App\User::class)->create();
+        factory(App\Category::class,5)->create();
 
-        // DB:table('categories')->insert(['categories'=>'new']);
-        // $this->command->info("Categories table seeded)");
+        $categories_array = App\Category::all('id')->pluck('id')->toArray();
+
+        $post = factory(App\Post::class,1000)->create()->each(function($post) use ($categories_array){
+             $this->attachRandomCategoriesToPost($post->id, $categories_array);
+        });
+    }
+
+    private function attachRandomCategoriesToPost($post_id, $categories)
+    {
+        shuffle($categories);
+        $categories_count = count($categories);
+        $post_categories_count = random_int(1, $categories_count);
+        for ($i=0; $i < $post_categories_count; $i++) 
+        {
+            DB::table('category_post')->insert([
+                'category_id' => $categories[$i],
+                'post_id' => $post_id,
+            ]);
+        }
     }
 }
