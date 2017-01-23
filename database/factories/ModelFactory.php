@@ -25,7 +25,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Category::class, function (Faker\Generator $faker) {
     return [
-        'category'=>$faker->word()
+        'category'=> ucfirst($faker->word(5))
     ];
 });
 

@@ -10,7 +10,7 @@
       <link href="{{ url('/') }}/css/select2.css" rel="stylesheet">
    </head>
    <body>
-      <nav class="navbar navbar-default navbar-static-top">
+      <nav class="navbar navbar-default navbar-fixed-top">
          <div class="container">
             <div class="navbar-header">
                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">

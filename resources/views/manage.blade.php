@@ -15,13 +15,19 @@
           </tr>
         </thead>
         <tbody>
-        @foreach($posts as $post_array)
-          <tr>
-            <td>{{$post_array->title}}</td>
-            <td>{{date('d M Y',strtotime($post_array->created_at))}}</td>
-            <td><a href="{{url("blog/$post_array->id/edit")}}">Edit</a></td>
-          </tr>
-        @endForeach  
+        @if(count($posts))
+          @foreach($posts as $post_array)
+            <tr>
+              <td>{{$post_array->title}}</td>
+              <td>{{date('d M Y',strtotime($post_array->created_at))}}</td>
+              <td><a href="{{url("blog/$post_array->id/edit")}}">Edit</a></td>
+            </tr>
+          @endForeach  
+        @else
+            <tr>
+              <td colspan="3"><i>No records found.</i></td>
+            </tr>        
+        @endIF  
         <tr>
            <td align="center" colspan="3">{{$posts->links()}} </td>
         </tr>

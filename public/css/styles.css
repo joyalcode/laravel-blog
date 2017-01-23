@@ -33,3 +33,11 @@ hr.info{
 .no-records{
 	margin-top: 20px;
 }
+
+.navbar-brand {
+    font-size: 26px;
+}
+
+body{
+	margin-top: 50px;
+}

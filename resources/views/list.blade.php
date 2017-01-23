@@ -16,10 +16,10 @@
             <p><span class="glyphicon glyphicon-time"></span> <i>Posted on {{date('F d, Y',strtotime($post_array->created_at))}} by <a href="{{url('blog/user/'.$post_array->user->id)}}">{{$post_array->user->name}}</a></i></p>
             <p>
                @if(strlen($post_array->post) > 500)
-               {!! nl2br(e(str_limit($post_array->post, $limit = 250, $end = '...'))) !!}
-               <a href="{{url('blog/'.$post_array->id)}}">Read more</a>
-               @else
-               {!! nl2br(e($post_array->post)) !!}
+                  {!! nl2br(e(str_limit($post_array->post, $limit = 500, $end = '...'))) !!}
+                  <a href="{{url('blog/'.$post_array->id)}}">Read more</a>
+                  @else
+                  {!! nl2br(e($post_array->post)) !!}
                @endIf
             </p>
             @foreach($post_array->categories as $category_array)

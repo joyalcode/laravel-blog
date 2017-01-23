@@ -33,7 +33,7 @@
             <h4>Recent Comments</h4>
             <ul class="list-group">
                @foreach($comments as $comment_array)
-               <li class="list-group-item"> {{$comment_array->comment}} <a href="{{url('blog/user/'.$comment_array->user->id)}}"><i>{{$comment_array->user->name}}<i></a> </li>
+               <li class="list-group-item"> {{$comment_array->comment}} <a href="{{url('blog/user/'.$comment_array->user->id)}}"><i>{{$comment_array->user->name}}</i></a> </li>
                @endforeach               
             </ul>
          </div>
