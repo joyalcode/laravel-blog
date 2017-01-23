@@ -4,12 +4,12 @@ This is a blog app based on laravel 5.3. It has minimum features (like categorie
 
 Installation
 
-git clone https://github.com/icodeweb/laravel-blog
-cd laravel-blog
-composer install 
-cp .env.example .env 
-update your .env file with database information
-php artisan key:generate 
-php artisan migrate
-php artisan db:seed
-Open the application in browser
+git clone https://github.com/icodeweb/laravel-blog <br>
+cd laravel-blog <br>
+composer install  <br>
+cp .env.example .env  <br>
+update your .env file with database information  <br>
+php artisan key:generate  <br>
+php artisan migrate  <br>
+php artisan db:seed  <br>
+Open the application in browser  <br>
